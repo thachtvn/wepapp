@@ -1,0 +1,53 @@
+<div class="wrapper fadeInDown full-height">
+    <div id="formContent" >
+        <div class="fadeIn first">
+            <img src="../../assets/logo.png" alt="システムギア">
+        </div>
+        <form id="login_form" name="form" #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()" novalidate>
+            <div class="text-danger text-left " *ngIf="f.submitted && username.invalid">
+                <div *ngIf="username.errors.required"><b>　●　ユーザー名は必須項目です。</b></div>
+                <div *ngIf="username.errors.minlength"><b>　●　ユーザー名は6 文字以上32 文字以内です。</b></div>
+            </div>
+            <div class="text-danger text-left " *ngIf="f.submitted && password.invalid">
+                <div *ngIf="password.errors.required"><b>　●　パスワードは必須項目です。</b></div>
+                <div *ngIf="password.errors.minlength"><b>　●　パスワードは6 文字以上32 文字以内です。</b></div>
+            </div>
+            <div class="text-danger text-left " *ngIf="f.submitted && isLoginFailed">
+                <b>{{ errorMessage }}</b>
+            </div>
+            <div class="text-success text-left " *ngIf="isSignupSuccess">
+                <b>{{ successMessage }}</b>
+            </div>
+
+            <b>ユーザー名</b>
+            <input
+            [class.is-invalid] = "f.submitted && username.invalid"
+            id="username"
+            name="username"
+            class="fadeIn second" 
+            type="text"
+            value=""
+            [(ngModel)]="form.username" 
+            required 
+            minlength="6"
+            maxlength="32"
+            #username="ngModel">
+            <br>
+            <b>パスワード</b>
+            <input
+            id="password"
+            name="password"
+            class="fadeIn second" 
+            type="password"
+            [(ngModel)]="form.password"
+            required
+            minlength="6"
+            maxlength="32"
+            #password="ngModel">
+            <input type="submit" class="fadeIn second" id="loginButton" value="ログイン" >
+        </form>
+        <div id="formFooter">
+            アカウントをお持ちでない方　<a class="btn btn-custom" routerLink="/signup">登録</a>
+        </div>
+    </div>
+</div>

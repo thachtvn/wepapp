@@ -1,0 +1,34 @@
+<div class="wrapper fadeInDown full-height">
+    <div id="formContent" >
+        <div class="fadeIn first">
+            <img src="../../assets/logo.png" alt="システムギア">
+        </div>
+        <form id="auth_form" name="form" #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()" novalidate>
+            <div>
+                <p>登録された(<b>{{mail}}</b>)にメールを送信しました。</p>
+                <p>メールに記載されているコードの入力を行なってください。</p>
+            </div>
+            <div class="text-danger text-left " *ngIf="f.submitted && code.invalid">
+                <b>確認コードは必須項目です。</b>
+            </div>
+            <div class="text-danger text-left " *ngIf="f.submitted && isAuthFailed">
+                <b>{{ errorMessage }}</b>
+            </div>
+            <b>確認コード</b>
+            <input
+            id="code"
+            name="code"
+            class="fadeIn second" 
+            type="text"
+            value=""
+            [(ngModel)]="form.code" 
+            required 
+            #code="ngModel">
+
+            <input type="submit" class="fadeIn second" id="" value="確認" >
+        </form>
+        <div id="formFooter">
+            アカウントをお持ちでない方　<a class="btn btn-custom" routerLink="/signup">登録</a>
+        </div>
+    </div>
+</div>

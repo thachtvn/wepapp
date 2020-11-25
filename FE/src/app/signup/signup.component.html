@@ -1,0 +1,82 @@
+<div class="wrapper fadeInDown">
+    <div id="formContent" style="max-width: 635px;">
+        <div class="fadeIn first">
+            <img src="../../assets/logo.png" alt="システムギア">
+        </div>
+        <form id="signup_form" name="form" #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()" novalidate>
+            <div class="text-danger text-left " *ngIf="f.submitted && mail.invalid">
+                <div *ngIf="mail.errors.required"><b>　●　メールアドレスは必須項目です。</b></div>
+                <div *ngIf="mail.errors.email"><b>　●　無効なメールアドレスです。</b></div>
+            </div>
+            <div class="text-danger text-left " *ngIf="f.submitted && username.invalid">
+                <div *ngIf="username.errors.required"><b>　●　ユーザー名は必須項目です。</b></div>
+                <div *ngIf="username.errors.minlength"><b>　●　ユーザー名は6 文字以上32 文字以内です。</b></div>
+            </div>
+            <div class="text-danger text-left " *ngIf="f.submitted && password.invalid">
+                <div *ngIf="password.errors.required"><b>　●　パスワードは必須項目です。</b></div>
+                <div *ngIf="password.errors.minlength"><b>　●　パスワードは6 文字以上32 文字以内です。</b></div>
+            </div>
+            <div class="text-danger text-left " *ngIf="f.submitted && repassword.invalid">
+                <b>　●　パスワード（確認）は必須項目です。</b>
+            </div>
+            <div class="text-danger text-left " *ngIf="f.submitted && isRepasswordFailed">
+                <b>　●　パスワードとパスワード（確認）は入力内容に誤りがあります。</b>
+            </div>
+            <div class="text-danger text-left " *ngIf="f.submitted && isSignupFailed">
+                <b>{{ errorMessage }}</b>
+            </div>
+            <b>メールアドレス</b>
+            <input
+            id="mail-address"
+            name="mail-address"
+            class="fadeIn second" 
+            type="text"
+            [(ngModel)]="form.mail" 
+            required 
+            ngModel [email]="true"
+            #mail="ngModel"
+            >
+            <br>
+            <b>ユーザー名</b>
+            <input
+            id="username"
+            name="username"
+            class="fadeIn second" 
+            type="text"
+            [(ngModel)]="form.username" 
+            required 
+            minlength="6"
+            maxlength="32"
+            #username="ngModel"
+            >
+            <br>
+            <b>パスワード</b>
+            <input
+            id="password"
+            name="password"
+            class="fadeIn second" 
+            type="password"
+            [(ngModel)]="form.password" 
+            required 
+            minlength="6"
+            maxlength="32"
+            #password="ngModel"
+            >
+            <br>
+            <b>パスワード（確認）</b>
+            <input
+            id="re-password"
+            name="re-password"
+            class="fadeIn second" 
+            type="password"
+            [(ngModel)]="form.repassword" 
+            required 
+            #repassword="ngModel"
+            >
+            <input id="submit" type="submit" class="fadeIn second" value="登録">
+        </form>
+        <div id="formFooter">
+            アカウントをお持ち方　<a class="btn btn-custom" routerLink="/login">ログイン</a>
+        </div>
+    </div>
+</div>
